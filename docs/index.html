@@ -1,0 +1,185 @@
+A Beginner Intro to Vue 2
+
+“Vue (pronounced /vjuː/, like view) is a progressive framework for building user interfaces…The core library is focused on the view layer only, and is very easy to pick up.”
+
+Vue.js 2.0 sports excellent performance stats, a relatively small payload (the bundled runtime version of Vue weighs in at 16kb once minified and gzipped), along with updates to companion libraries like vue-router and vuex, the state management library for Vue. There’s far too much to cover in just one article, but keep an eye out for a later article where we’ll look more closely at some of the libraries that couple nicely with the core framework.
+
+<b>Taken from Libraries</b>
+
+As we go through this tutorial you’ll see many features that Vue has that are clearly inspired by other frameworks. This is a good thing; it’s great to see new frameworks take some ideas from other libraries and improve on them. In particular, you’ll see Vue’s templating is very close to Angular, but its components and component lifecycle methods are closer to React (and Angular 2, as well).
+
+One such example of this is that, much like React and nearly every framework in JavaScript land today, Vue uses the idea of a virtual DOM to keep rendering efficient. Vue uses a fork of snabbdom, one of the more popular virtual DOM libraries. The Vue site includes documentation on its Virtual DOM rendering, but as a user all you need to know is that Vue is very good at keeping your rendering fast (in fact, it performs better than React in many cases), meaning you can rest assured you’re building on a solid platform.
+
+<h2>Web Components</h2>
+
+Much like other frameworks these days, Vue’s core building block is the component. Your application should be a series of components that build on top of each other to produce the final application. Vue.js goes one step further by suggesting (although not enforcing) that you define your components in a single .vue file, which can then be parsed by build tools (we’ll come onto those shortly). Given that the aim of this article is to fully explore Vue and what it feels like to work with, I’m going to use this convention for my application.
+
+Single Component file Vue looks like so:
+
+<code>
+	<template>
+	  <p>This is my HTML for my component</p>
+	</template>
+
+	<script>
+	export default {
+	  // all code for my component goes here
+	}
+	</script>
+
+	<style scoped>
+	  /* CSS here
+	   * by including `scoped`, we ensure that all CSS
+	   * is scoped to this component!
+	   */
+	</style>
+</code>
+
+Alternatively, you can give each element a src attribute and point to a separate HTML, JS or CSS file respectively if you don’t like having all parts of the component in one file.
+
+<h2>Steps to make a Project</h2>
+
+<a href="https://nodejs.org/en/" target="_blank">Nodejs</a> (>=4.x, 6.x preferred), npm version 3+ and <a href="https://git-scm.com/" target="_blank">Git</a>.
+Commands:
+<code>
+$ sudo apt-get install python-software-properties
+$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+$ sudo apt-get install nodejs
+</code>
+<a href="https://www.npmjs.com/get-npm" target="_blank">NPM - npm install npm@latest -g</code>
+<a href="https://github.com/vuejs/vue-cli" target="_blank">Vue CLI</a> - npm install --global vue-cli</code>
+
+
+<h2>Writing First Vue.js 2.0 App</h2>
+
+<code>$ vue init <template-name> <project-name></code>
+Example:
+<code>
+$ vue init webpack-simple my-sample
+$ cd my-sample
+$ npm install
+$ npm run dev
+</code>
+
+Current available templates include:
+<ul>
+	<li>webpack - A full-featured Webpack + vue-loader setup with hot reload, linting, testing & css extraction.</li>
+	<li>webpack-simple - A simple Webpack + vue-loader setup for quick prototyping.</li>
+	<li>browserify - A full-featured Browserify + vueify setup with hot-reload, linting & unit testing.</li>
+	<li>browserify-simple - A simple Browserify + vueify setup for quick prototyping.</li>
+	<li>pwa - PWA template for vue-cli based on the webpack template</li>
+	<li>simple - The simplest possible Vue setup in a single HTML file</li>
+</ul>
+
+<h2>Vue Devtools</h2>
+
+Before we dive into a slightly more complicated app with Vue, now is a good time to mention that you should definitely get the <a href="https://github.com/vuejs/vue-devtools" target="_blank">Vue Devtools</a> installed. These sit within the Chrome developer tools and give you a great way to look through your app and all the properties being passed round, state that each component has, and so on.
+
+<h2>Simple Vue App</h2>
+
+<p data-height="406" data-theme-id="0" data-slug-hash="KqRzKy" data-default-tab="result" data-user="danichim" data-embed-version="2" data-pen-title="simple-vue-app" class="codepen">See the Pen <a href="https://codepen.io/danichim/pen/KqRzKy/">simple-vue-app</a> by Dan Ichim (<a href="https://codepen.io/danichim">@danichim</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2>Creating Two-Way Bindings</h2>
+Let’s change our view so that it contains an input element whose v-model points to the name property:
+<p data-height="265" data-theme-id="0" data-slug-hash="PjeNJm" data-default-tab="html,result" data-user="danichim" data-embed-version="2" data-pen-title="input rendering reactive" class="codepen">See the Pen <a href="https://codepen.io/danichim/pen/PjeNJm/">input rendering reactive</a> by Dan Ichim (<a href="https://codepen.io/danichim">@danichim</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2>Using Filters</h2>
+A filter is a function you can use inside a directive or a mustache-style binding. A filter is always preceded by a pipe symbol (|). For example, if you want to display the name property in uppercase, your mustache-style binding would look like this:
+{{ name | uppercase }}
+<p data-height="265" data-theme-id="0" data-slug-hash="xrjVYK" data-default-tab="html,result" data-user="danichim" data-embed-version="2" data-pen-title="input filters reactive" class="codepen">See the Pen <a href="https://codepen.io/danichim/pen/xrjVYK/">input filters reactive</a> by Dan Ichim (<a href="https://codepen.io/danichim">@danichim</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+The filters lowercase and capitalize can be used in a similar manner. We’ll talk more about filters in the next section.
+
+<h2>Rendering Arrays</h2>
+If your model has an array, you can display the contents of that array by adding a v-for directive to a list’s <li> element. To demonstrate that, let’s add an array to our model:
+
+<code>
+	var myModel = {
+	  name: "Dan Ichim",
+	  age: 26,
+	  friends: [
+	    { name: "Dan", age: 26 },
+	    { name: "Marius", age: 20 },
+	    { name: "Alin", age: 22 },
+	    { name: "Catalin", age: 29 }
+	  ],
+	  search: ""
+	};
+</code>
+
+The following code shows you how to display the name property of every object in the friends array:
+
+<code>
+	<div id="my_view">
+	  <ul>
+	    <li v-for="friend in friends"> {{ friend.name }} </li>
+	  </ul>
+	</div>
+</code>
+
+To change the order in which the elements are listed, use the orderBy filter inside the v-for directive. For example, if you want to order the elements by age, your code should be as follows:
+
+<code>
+	<div id="my_view">
+	  <ul>
+	    <li v-for="friend in friends | orderBy 'age'"> {{ friend.name }}</li>
+	  </ul>
+	</div>
+</code>
+
+You can also render items conditionally. To achieve this task, use the filterBy filter. For example, the following example shows how to render only those items which contain the character “a” in the name field:
+
+<code>
+	<div id="my_view">
+	  <ul>
+	    <li v-for="friend in friends | filterBy 'a' in 'name'"> {{ friend.name }} </li>
+	  </ul>
+	</div>
+</code>
+
+This <a href="https://codepen.io/danichim/pen/yXjOKR">third demo</a> uses a two-way data binding and a filterBy filter to simulate a search:
+<p data-height="265" data-theme-id="0" data-slug-hash="yXjOKR" data-default-tab="result" data-user="danichim" data-embed-version="2" data-pen-title="list filters reactive" class="codepen">See the Pen <a href="https://codepen.io/danichim/pen/yXjOKR/">list filters reactive</a> by Dan Ichim (<a href="https://codepen.io/danichim">@danichim</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<h2>Handling Events</h2>
+In Vue.js, if you need to handle events associated with your view, you should add event handlers inside the view-model’s methods property. Inside all Vue.js event handlers, you can use this to access the items in the data model.
+The following view-model contains a click handler:
+
+<code>
+	var myViewModel = new Vue({
+	    el: '#my_view',
+	    data: myModel,
+	  
+	    // A click handler inside methods
+	    methods: {
+	      myClickEvent: function(e) {
+	        // "this" here refers to the model
+	        alert("Howdy " + this.myName);
+	      }
+	    }
+	});
+</code>
+
+To associate an event handler defined in the view-model with one or more UI elements in the view, you should use the v-on directive. For example, the following view has a <button> which uses the v-on directive to call myClickEvent:
+
+<code>
+	<div id="my_view">
+	  Name: <input type="text" v-model="myName">
+	  <button v-on:click="myClickEvent">Say Hi!</button>
+	</div>
+</code>
+
+Putting these snippets together, results in this <a href="https://codepen.io/danichim/pen/mwLPQm" target="_blank">demo for click handler</a>:
+<p data-height="265" data-theme-id="0" data-slug-hash="mwLPQm" data-default-tab="js,result" data-user="danichim" data-embed-version="2" data-pen-title="Events Handling Vue" class="codepen">See the Pen <a href="https://codepen.io/danichim/pen/mwLPQm/">Events Handling Vue</a> by Dan Ichim (<a href="https://codepen.io/danichim">@danichim</a>) on <a href="https://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+
+
+
+
+
+
+
+
