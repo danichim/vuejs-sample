@@ -157,13 +157,13 @@ $ npm run dev
 
 <h2>Displaying Results from GitHub</h2>
 
-<p>We’ll create the GithubOutput component, we also import the bus module, as we’ll need it to know when the username changes. The data that this component will be responsible for will be an object that maps GitHub usernames to the data we got from the GitHub API. This means we won’t have to make the request to the API every single time; if we’ve already fetched the data previously we can simply reuse it. We’ll also store the last username we were given, so we know what data to display on screen.</p>
+<p>We’ll create the GithubOutput component, we also import the bus module, as we’ll need it to know when the username changes. The data that this component will be responsible for will be an object that maps GitHub usernames to the data we got from the GitHub API. This means we won’t have to make the request to the API every single time; if we’ve already fetched the data previously we can simply reuse it. We’ll also store the last username we were given, so we know what data to display on the screen.</p>
 
-<p>When the component is created we want to listen for any new-username events that are emitted on the message bus. Thankfully, Vue supports a number of lifecycle hooks, including created. Because we’re responsible developers let’s also stop listening for events when the component is destroyed by using the destroyed event:</p>
+<p>When the component is created we want to listen for any new-username events that are emitted on the message bus. Thankfully, Vue supports a number of lifecycle hooks, including the create lifecycle. Because we’re responsible developers let’s also stop listening for events when the component is not used by calling the destroyed event:</p>
 <iframe src="https://pastebin.com/embed_iframe/21NSZ0un" style="border:none;width:100%"></iframe>
 
 <h2>Conditional Rendering</h2>
-<p>If we don’t have a username, like we won’t when the component is first created, we want to show a message to the user. Vue has a number of conditional rendering techniques, but the easiest is the v-if directive, which takes a condition and will only render the element if it exists. It also can be paired with v-else :</p>
+<p>If we don’t have a username, like, when the component is first created, we want to show a message to the user. Vue has a number of conditional rendering techniques, but the easiest is the v-if directive, which takes a condition and will only render the element if it exists. It also can be paired with v-else :</p>
 <iframe src="https://pastebin.com/embed_iframe/gwJSr8sd" style="border:none;width:100%"></iframe>
 
 <p>Once again, this will look very familiar to any Angular developers. We use double equals rather than triple equals here because we want the conditional to be true not only if currentUsername is null but also if it’s undefined, and null == undefined is true.</p>
@@ -171,7 +171,7 @@ $ npm run dev
 <h2>Fetching from GitHub</h2>
 <p>Vue.js doesn’t ship with a built-in HTTP library, and for good reason. These days the fetch API ships natively in many browsers (although at the time of writing, not IE11, Safari or iOS Safari). For the sake of this tutorial I’m not going to use a polyfill, but you can <a href="https://github.com/github/fetch" target="_blank">easily polyfill the API in browsers</a> if you need to. If you don’t like the fetch API there are many third party libraries for HTTP and the one mentioned in the Vue docs is <a href="https://github.com/mzabriskie/axios" target="_blank">Axios</a>.</p>
 
-<p>To make the HTTP request we’ll give the component another method, fetchGithubData, that makes a request to the GitHub API and stores the result. It will also first check to see if we already have data for this user, and not make the request if so:</p>
+<p>To make the HTTP request we’ll give the component another method, fetchGithubData, that makes a request to the GitHub API and stores the result. It will also first check to see if we already fetched the data for this user, and not make the request if so:</p>
 <iframe src="https://pastebin.com/embed_iframe/5DHE0k8E" style="border:none;width:100%"></iframe>
 
 <p>We then finally just need to trigger this method when the username changes:
@@ -186,11 +186,11 @@ $ npm run dev
 
 <p>With that, our Vue.js 2 GitHub application is in a pretty good state! You can find <a href="https://github.com/danichim/vuejs-sample" target="_blank">all the code on GitHub</a>.</p>
 
-<p>If you’ve enjoyed this post and would like to learn more the best place to start is definitely the official Vue.js site. If you’re interested in some of the other Vue libraries – including Vuex for state management and the Vue router keep an eye on our blog.</p>
+<p>If you’ve enjoyed this post and would like to learn more, the best place to start is definitely the official Vue.js site. If you’re interested in some of the other Vue libraries – including Vuex for state management and the Vue router keep an eye on our blog.</p>
 
-<p>You’re encouraged to break your system down into small components and all in all I found it a very seamless experience. I also can’t commend the Vue team highly enough for their documentation, it’s absolutely brilliant. The guides are excellent and the API reference is thorough yet easy to navigate to find exactly what you’re after.</p>
+<p>You’re encouraged to break your system down into small components and all in all I found it a very seamless experience. I also can’t commend the Vue team highly enough for their documentation, it’s absolutely brilliant. The guides are excellent and the API reference is thorough and yet easy to navigate to find exactly what you’re looking ( searching ) for.</p>
 
-<p>I had high hopes when getting started with Vue, as I’d heard only good things, and I’m happy to say it really met my expectations. Working with Vue feels like taking the best parts of React and merging them with the best parts of Angular. Some of the directives (like v-if, v-else, v-model and so on) are really easy to get started with (and easier to immediately understand than doing conditionals in React’s JSX syntax), but Vue’s component system feels very similar to React’s.</p>
+<p>I had high hopes when i started with Vue, as I’d heard only good things, and I’m happy to say it really met my expectations. Working with Vue feels like taking the best parts of React and merging them with the best parts of Angular. Some of the directives (like v-if, v-else, v-model and so on) are really easy to get started with (and easier to immediately understand than doing conditionals in React’s JSX syntax), but Vue’s component system feels very similar to React’s.</p>
 
 Thanks! - <a href="https://danichim.github.io/vuejs-sample/">Go Top</a>
 </body>
