@@ -132,18 +132,18 @@ $ npm run dev
 <p>There are two important attributes that you’ll notice: <code>v-on and <code>v-model.</p>
 <p><code>v-on</code> is how we bind to DOM events in Vue and call a function. For example, <code>< p v-on:click="foo" > Click me! < /p ></code> would call the component’s <code>foo</code> method every time the paragraph was clicked. If you’d like to go through event handling in greater detail, I highly recommend the <a href="https://vuejs.org/v2/guide/events.html" target="_blank">Vue documentation on event handling</a>.</p>
 
-<p><code>v-model</code> creates a two-way data binding between a form input and a piece of data. Behind the scenes, <code>v-model</code> is effectively listening for change events on the form input and updating the data in the Vue component to match.
+<p><code>v-model</code> creates a two-way data binding between a form input and a piece of data. Behind the scenes, <code>v-model</code> is effectively listening for event changes on the form input and updating the data in the Vue component to match.
 </p>
 
 <p>Taking our template above into consideration, here’s how we’re using v-on and v-model to deal with the data in the form:</p>
 
 <ul>
 	<li>v-on:submit.prevent binds run when the form is submitted. By adding .prevent that means that Vue will automatically prevent the default action from occurring (if Vue didn’t do this we could call event.preventDefault() in our code, but we might as well take advantage of Vue’s feature).</li>
-	<li>v-model:username binds the input’s value to a value, username, in our code. For those of you familiar with Angular you may recognize this as very similar to ng-model. We declared that it had a piece of data, username, and here we’ve bound that piece of data to the input field. The two will automatically be kept in sync.</li>
+	<li>v-model:username binds the input’s value to variable username, in our code. For those of you who are familiar with Angular you may recognize this as very similar to ng-model. We declared that it had a piece of data, username, and here we’ve bound that piece of data to the input field. The two will automatically be kept in sync.</li>
 	<li>v-on:click or @click call the method onSubmit</li>
 </ul>
 
-<p>Now, back in our component’s JavaScript, we can declare the onSubmit method. Note that the name here is entirely arbitrary – you can choose whatever you’d like – but I like to stick with the convention of naming the function after the event that will trigger it.</p>
+<p>Now, back in our components JavaScript, we can declare the onSubmit method. Note that the name here is entirely arbitrary – you can choose whatever you’d like – but I like to stick with the convention of naming the function after the event that will trigger it.</p>
 
 <iframe src="https://pastebin.com/embed_iframe/5qyVPR2j" style="border:none;width:100%"></iframe>
 
